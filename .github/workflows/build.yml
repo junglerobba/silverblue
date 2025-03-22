@@ -10,7 +10,7 @@ on:
 env:
   IMAGE_REGISTRY: ghcr.io/${{ github.repository_owner }}
   BASE_IMAGE_REGISTRY: quay.io/fedora-ostree-desktops
-  BASE_IMAGE: kinoite
+  BASE_IMAGE: silverblue
   BASE_IMAGE_VERSION: 42
 
 jobs:
