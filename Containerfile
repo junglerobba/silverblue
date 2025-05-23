@@ -15,7 +15,6 @@ FROM ${BASE_IMAGE_REGISTRY}/${BASE_IMAGE}:${BASE_IMAGE_VERSION}
 COPY --from=nix /nix-installers/lix.rpm /tmp/lix.rpm
 RUN rpm-ostree install \
 	/tmp/lix.rpm \
-	alacritty \
 	steam-devices \
 	&& rm /tmp/lix.rpm
 
