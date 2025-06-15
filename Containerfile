@@ -16,6 +16,7 @@ COPY --from=nix /nix-installers/lix.rpm /tmp/lix.rpm
 RUN rpm-ostree install \
 	/tmp/lix.rpm \
 	steam-devices \
+	niri swaybg SwayNotificationCenter \
 	&& rm /tmp/lix.rpm
 
 RUN install -d -m 0755 /nix /nix/var/nix/daemon-socket /nix/var/nix/gcroots/per-user /nix/var/nix/profiles/per-user
