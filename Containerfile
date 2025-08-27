@@ -1,6 +1,6 @@
-ARG BASE_IMAGE_REGISTRY=quay.io/fedora-ostree-desktops
-ARG BASE_IMAGE=silverblue
-ARG BASE_IMAGE_VERSION=42
+ARG BASE_IMAGE_REGISTRY
+ARG BASE_IMAGE
+ARG BASE_IMAGE_VERSION
 
 
 FROM docker.io/nixpkgs/nix-flakes:latest as nix
