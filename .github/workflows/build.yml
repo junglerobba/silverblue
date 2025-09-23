@@ -10,13 +10,15 @@ on:
 env:
   IMAGE_REGISTRY: ghcr.io/${{ github.repository_owner }}
   BASE_IMAGE_REGISTRY: quay.io/fedora-ostree-desktops
-  BASE_IMAGE: silverblue
   BASE_IMAGE_VERSION: 43
 
 jobs:
   build:
     name: Build and push image
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        base: ['silverblue', 'kinoite']
     permissions:
       contents: read
       packages: write
@@ -34,9 +36,9 @@ jobs:
             ./Containerfile
           build-args: |
             BASE_IMAGE_REGISTRY=${{ env.BASE_IMAGE_REGISTRY }}
-            BASE_IMAGE=${{ env.BASE_IMAGE }}
+            BASE_IMAGE=${{ matrix.base }}
             BASE_IMAGE_VERSION=${{ env.BASE_IMAGE_VERSION }}
-          image: silverblue
+          image: ${{ matrix.base }}
           tags: latest
 
       - name: Push To GHCR
