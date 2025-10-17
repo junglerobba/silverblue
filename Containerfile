@@ -27,4 +27,6 @@ RUN rpm-ostree override remove \
 	firefox \
 	firefox-langpacks
 
+COPY ./files /
+
 RUN ostree container commit
