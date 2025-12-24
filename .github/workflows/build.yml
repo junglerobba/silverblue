@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        base: ['silverblue', 'kinoite']
+        base: ["silverblue", "cosmic-atomic"]
     permissions:
       contents: read
       packages: write
