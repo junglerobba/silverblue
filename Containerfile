@@ -7,7 +7,7 @@ FROM ${BASE_IMAGE_REGISTRY}/${BASE_IMAGE}:${BASE_IMAGE_VERSION}
 RUN rpm-ostree install \
 	steam-devices \
 	niri swaybg SwayNotificationCenter \
-	sway rofi-wayland
+	git-credential-libsecret git-email
 
 RUN rpm-ostree override remove \
 	firefox \
