@@ -1,3 +1,0 @@
-[submodule "nix-installers"]
-	path = nix-installers
-	url = https://github.com/junglerobba/nix-installers
