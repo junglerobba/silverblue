@@ -1,0 +1,16 @@
+[Unit]
+Description=Create /var/nix
+DefaultDependencies=no
+After=systemd-remount-fs.service
+Before=nix.mount
+Before=local-fs.target
+RequiresMountsFor=/var
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/install -dm0755 -o root -g root /var/nix
+ExecStart=/usr/sbin/restorecon -F /var/nix
+RemainAfterExit=yes
+
+[Install]
+RequiredBy=nix.mount
