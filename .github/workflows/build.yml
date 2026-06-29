@@ -25,6 +25,9 @@ jobs:
       id-token: write
 
     steps:
+      - name: cosign-installer
+        uses: sigstore/cosign-installer@v4.1.2
+
       - uses: actions/checkout@v4
         with:
           submodules: recursive
@@ -57,10 +60,22 @@ jobs:
           extra-args: |
             --disable-content-trust
 
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@v3
+      - name: Login to GitHub Container Registry for cosign
         if: github.event_name != 'pull_request'
+        uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Sign image
+        if: github.event_name != 'pull_request'
+        env:
+          COSIGN_YES: "true"
+        run: |
+          echo "${{ secrets.SIGNING_SECRET }}" > cosign.key
+          cosign sign --key cosign.key \
+            -a "repo=${{ github.repository }}" \
+            -a "workflow=${{ github.workflow }}" \
+            -a "ref=${{ github.sha }}" \
+            ${{ steps.push.outputs.registry-path }}@${{ steps.push.outputs.digest }}
