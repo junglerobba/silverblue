@@ -28,7 +28,7 @@ jobs:
       - name: cosign-installer
         uses: sigstore/cosign-installer@v4.1.2
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           submodules: recursive
       - name: Build image
